@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { BarcodeTag } from "../../components/print/BarcodeTag";
 import { PageHeader } from "../../components/page_header/PageHeader";
+import { getAppSettings, saveAppSettings } from "../../utils/appSettings";
 import {
   BARCODE_LABEL_OPTIONS,
   BARCODE_PRINT_DEFAULTS,
@@ -23,6 +24,7 @@ const PREVIEW_PRODUCT = {
 
 export function SettingsPage() {
   const [settings, setSettings] = useState(() => getBarcodePrintSettings());
+  const [appSettings, setAppSettings] = useState(() => getAppSettings());
   const [saved, setSaved] = useState("");
 
   const labelOption = useMemo(
@@ -40,12 +42,15 @@ export function SettingsPage() {
 
   const handleSave = () => {
     saveBarcodePrintSettings(settings);
+    saveAppSettings(appSettings);
     setSaved("Sozlamalar saqlandi");
   };
 
   const handleReset = () => {
     saveBarcodePrintSettings(BARCODE_PRINT_DEFAULTS);
+    saveAppSettings({ onScreenKeyboardEnabled: true });
     setSettings(BARCODE_PRINT_DEFAULTS);
+    setAppSettings({ onScreenKeyboardEnabled: true });
     setSaved("Standart sozlama tiklandi");
   };
 
@@ -57,6 +62,29 @@ export function SettingsPage() {
       />
 
       <section className="panel-box barcode-settings-panel">
+        <div className="keyboard-settings-strip">
+          <div>
+            <h3>Ekran klaviaturasi</h3>
+            <p>POS monitor uchun input bosilganda kichik klaviatura chiqishini yoqish yoki o'chirish.</p>
+          </div>
+          <label className="settings-switch">
+            <input
+              type="checkbox"
+              checked={appSettings.onScreenKeyboardEnabled}
+              onChange={(event) => {
+                const next = {
+                  ...appSettings,
+                  onScreenKeyboardEnabled: event.target.checked,
+                };
+                setSaved("");
+                setAppSettings(next);
+                saveAppSettings(next);
+              }}
+            />
+            <span>{appSettings.onScreenKeyboardEnabled ? "Yoqilgan" : "O'chirilgan"}</span>
+          </label>
+        </div>
+
         <div className="barcode-settings-head">
           <div className="barcode-settings-title">
             <span className="settings-icon-box" aria-hidden="true">

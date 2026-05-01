@@ -151,6 +151,109 @@ a {
   gap: 10px;
 }
 
+.screen-keyboard {
+  position: fixed;
+  z-index: 99999;
+  width: min(650px, calc(100vw - 16px));
+  padding: 10px;
+  border: 1px solid rgba(99, 164, 255, 0.45);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(9, 25, 55, 0.96), rgba(24, 48, 96, 0.98));
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.42);
+  color: #f7fbff;
+  user-select: none;
+  touch-action: none;
+}
+
+.screen-keyboard__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 8px;
+  cursor: move;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.screen-keyboard__bar button,
+.screen-keyboard__key {
+  border: 0;
+  color: #f7fbff;
+  font: inherit;
+}
+
+.screen-keyboard__bar button {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.screen-keyboard__rows {
+  display: grid;
+  gap: 7px;
+}
+
+.screen-keyboard__row {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+
+.screen-keyboard__key {
+  min-width: 48px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.screen-keyboard__key:active,
+.screen-keyboard__key.is-active {
+  background: linear-gradient(135deg, #29a9ff, #1f6bff);
+}
+
+.screen-keyboard__key--wide {
+  min-width: 86px;
+}
+
+.screen-keyboard__key--space {
+  flex: 1;
+  max-width: 260px;
+}
+
+.screen-keyboard__key--done {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+@media (max-width: 720px) {
+  .screen-keyboard {
+    width: calc(100vw - 16px);
+    padding: 8px;
+  }
+
+  .screen-keyboard__row {
+    gap: 5px;
+  }
+
+  .screen-keyboard__key {
+    min-width: 32px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  .screen-keyboard__key--wide {
+    min-width: 62px;
+  }
+}
+
 .workspace {
   padding: 28px;
   min-width: 0;
@@ -1501,6 +1604,43 @@ a {
 .barcode-settings-panel {
   display: grid;
   gap: 20px;
+}
+
+.keyboard-settings-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(45, 165, 255, 0.28);
+  border-radius: 18px;
+  background: rgba(45, 165, 255, 0.08);
+}
+
+.keyboard-settings-strip h3,
+.keyboard-settings-strip p {
+  margin: 0;
+}
+
+.keyboard-settings-strip p {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.settings-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 142px;
+  justify-content: flex-end;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.settings-switch input {
+  width: 42px;
+  height: 22px;
+  accent-color: var(--accent);
 }
 
 .barcode-settings-head {

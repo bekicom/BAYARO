@@ -5,6 +5,7 @@ import { BrowserRouter, HashRouter } from "react-router-dom";
 import { store } from "./context/store";
 import { AuthProvider } from "./context/AuthContext";
 import { AppRouter } from "./router";
+import { OnScreenKeyboard } from "./components/keyboard/OnScreenKeyboard";
 import "./styles.css";
 
 const Router = window.location.protocol === "file:" ? HashRouter : BrowserRouter;
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Router>
         <AuthProvider>
           <AppRouter />
+          <OnScreenKeyboard />
         </AuthProvider>
       </Router>
     </Provider>
