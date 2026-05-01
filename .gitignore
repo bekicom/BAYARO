@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+.pnp/
+
+# build outputs
+dist/
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# local environment
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+run*.out
+run*.err
+*_check_*.out.log
+*_check_*.err.log
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Flutter generated desktop artifacts
+flutter/windows/flutter/ephemeral/
+flutter/windows/runner/Debug/
+flutter/windows/runner/Release/
+
+# old cloned git backups
+.git_backup_codex/
+**/.git_backup_codex/
