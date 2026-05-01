@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { NAV_ITEMS } from "../index";
 import { useAuth } from "../context/AuthContext";
@@ -122,12 +123,28 @@ function SidebarIcon({ name }) {
 
 export function AppLayout() {
   const { logout } = useAuth();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    return localStorage.getItem("bayaro-sidebar-collapsed") === "1";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("bayaro-sidebar-collapsed", sidebarCollapsed ? "1" : "0");
+  }, [sidebarCollapsed]);
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${sidebarCollapsed ? "sidebar-collapsed" : ""}`.trim()}>
       <aside className="sidebar">
         <div className="brand-block brand-block-simple">
           <h1>BAYARO</h1>
+          <button
+            type="button"
+            className="sidebar-toggle"
+            onClick={() => setSidebarCollapsed((prev) => !prev)}
+            title={sidebarCollapsed ? "Sidebarni ochish" : "Sidebarni yopish"}
+            aria-label={sidebarCollapsed ? "Sidebarni ochish" : "Sidebarni yopish"}
+          >
+            {sidebarCollapsed ? ">" : "<"}
+          </button>
         </div>
 
         <nav className="sidebar-nav">
@@ -141,7 +158,7 @@ export function AppLayout() {
               <span className="sidebar-link-icon">
                 <SidebarIcon name={item.icon} />
               </span>
-              {item.label}
+              <span className="sidebar-link-label">{item.label}</span>
             </NavLink>
           ))}
         </nav>
@@ -152,7 +169,7 @@ export function AppLayout() {
             <span className="sidebar-link-icon">
               <SidebarIcon name="logout" />
             </span>
-            Chiqish
+            <span className="sidebar-link-label">Chiqish</span>
           </button>
         </div>
       </aside>

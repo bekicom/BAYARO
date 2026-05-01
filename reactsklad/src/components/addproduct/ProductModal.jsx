@@ -37,7 +37,6 @@ const baseForm = {
   code: "",
   barcode: "",
   barcodeAliases: [""],
-  gender: "",
   categoryId: "",
   supplierId: "",
   sectionId: "",
@@ -153,7 +152,6 @@ function toFormData(current) {
     barcodeAliases: Array.isArray(current.barcodeAliases) && current.barcodeAliases.length
       ? current.barcodeAliases
       : [""],
-    gender: current.gender || "",
     categoryId: getRelationId(current.categoryId),
     supplierId: getRelationId(current.supplierId),
     sectionId: "",
@@ -558,42 +556,6 @@ export function ProductModal({
               </>
             ) : null}
           </div>
-          <div className="full-width">
-            <span>Jinsi</span>
-            <div className="radio-row">
-              <label className="radio-item">
-                <input
-                  type="radio"
-                  name="gender"
-                  value=""
-                  checked={form.gender === ""}
-                  onChange={(event) => setForm((prev) => ({ ...prev, gender: event.target.value }))}
-                />
-                <span>Umumiy</span>
-              </label>
-              <label className="radio-item">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="qiz_bola"
-                  checked={form.gender === "qiz_bola"}
-                  onChange={(event) => setForm((prev) => ({ ...prev, gender: event.target.value }))}
-                />
-                <span>Qiz bola</span>
-              </label>
-              <label className="radio-item">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="ogil_bola"
-                  checked={form.gender === "ogil_bola"}
-                  onChange={(event) => setForm((prev) => ({ ...prev, gender: event.target.value }))}
-                />
-                <span>O'g'il bola</span>
-              </label>
-            </div>
-          </div>
-
           <SearchableDropdown
             label="Kategoriya"
             value={selectedCategoryName}

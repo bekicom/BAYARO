@@ -54,7 +54,7 @@ export function InstallPwaButton() {
           <path d="M5 21h14" />
         </svg>
       </span>
-      Ilovani o'rnatish
+      <span className="sidebar-link-label">Ilovani o'rnatish</span>
     </button>
   );
 }

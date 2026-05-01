@@ -54,12 +54,6 @@ function ActionIcon({ type }) {
 }
 
 export function ProductsTable({ products, onEdit, onDelete, onRestock, onPrint, onView }) {
-  const getGenderLabel = (value) => {
-    if (value === "qiz_bola") return "Qiz bola";
-    if (value === "ogil_bola") return "O'g'il bola";
-    return "-";
-  };
-
   return (
     <div className="table-panel">
       <table>
@@ -67,13 +61,11 @@ export function ProductsTable({ products, onEdit, onDelete, onRestock, onPrint, 
           <tr>
             <th>Mahsulot nomi</th>
             <th>Kodi</th>
-            <th>Jinsi</th>
             <th>Shtixkod</th>
             <th>Kategoriya</th>
             <th>Yetkazib beruvchi</th>
             <th>Kelish narxi</th>
             <th>Sotish narxi</th>
-            <th>To'lov / Qarz</th>
             <th>Xisobot</th>
             <th>Miqdori</th>
             <th>Birligi</th>
@@ -85,7 +77,6 @@ export function ProductsTable({ products, onEdit, onDelete, onRestock, onPrint, 
             <tr key={item._id}>
               <td>{item.name}</td>
               <td>{item.code || "-"}</td>
-              <td>{getGenderLabel(item.gender)}</td>
               <td>
                 <div>{item.barcode}</div>
                 {Array.isArray(item.barcodeAliases) && item.barcodeAliases.length ? (
@@ -98,7 +89,6 @@ export function ProductsTable({ products, onEdit, onDelete, onRestock, onPrint, 
               <td>{getSupplierName(item)}</td>
               <td>{formatMoneyWithCurrency(item.purchasePrice)}</td>
               <td>{formatMoneyWithCurrency(item.retailPrice)}</td>
-              <td>{item.paymentType || "-"} / {formatMoneyWithCurrency(item.debtAmount)}</td>
               <td>
                 {normalizeUnit(item.unit) === "dona"
                   ? `${(item.sizeOptions || []).join(", ")}${item.colorOptions?.length ? ` | ${item.colorOptions.join(", ")}` : ""}`

@@ -19,7 +19,6 @@ const PREVIEW_PRODUCT = {
   retailPrice: 25,
   sizeOptions: ["5-8"],
   colorOptions: ["Multikolor"],
-  gender: "ogil_bola",
 };
 
 export function SettingsPage() {

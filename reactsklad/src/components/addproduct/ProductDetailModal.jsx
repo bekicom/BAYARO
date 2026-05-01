@@ -41,10 +41,6 @@ export function ProductDetailModal({ open, product, onClose }) {
             <strong>{product.code || "-"}</strong>
           </div>
           <div className="detail-summary-card">
-            <span>Jinsi</span>
-            <strong>{product.gender === "qiz_bola" ? "Qiz bola" : product.gender === "ogil_bola" ? "O'g'il bola" : "Umumiy"}</strong>
-          </div>
-          <div className="detail-summary-card">
             <span>Birligi</span>
             <strong>{normalizeUnit(product.unit)}</strong>
           </div>
