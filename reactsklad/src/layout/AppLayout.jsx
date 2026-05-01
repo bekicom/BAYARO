@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { NAV_ITEMS } from "../index";
 import { useAuth } from "../context/AuthContext";
+import { InstallPwaButton } from "../components/pwa/InstallPwaButton";
 
 function SidebarIcon({ name }) {
   const common = {
@@ -146,6 +147,7 @@ export function AppLayout() {
         </nav>
 
         <div className="sidebar-user">
+          <InstallPwaButton />
           <button type="button" className="danger-outline-btn logout-btn" onClick={logout}>
             <span className="sidebar-link-icon">
               <SidebarIcon name="logout" />

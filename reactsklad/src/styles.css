@@ -147,7 +147,8 @@ a {
   border-radius: 0;
   background: transparent;
   border: 0;
-  display: block;
+  display: grid;
+  gap: 10px;
 }
 
 .workspace {
@@ -479,12 +480,28 @@ a {
   border: 1px solid var(--line);
 }
 
-.logout-btn {
+.logout-btn,
+.install-pwa-btn {
   width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.install-pwa-btn {
+  min-height: 46px;
+  border: 1px solid rgba(45, 165, 255, 0.34);
+  border-radius: 14px;
+  color: #eef7ff;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(45, 165, 255, 0.28), rgba(183, 137, 57, 0.2));
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.install-pwa-btn:hover {
+  border-color: rgba(45, 165, 255, 0.62);
+  transform: translateY(-1px);
 }
 
 .full-btn {
@@ -637,7 +654,8 @@ a {
 
 .action-pill svg,
 .sidebar-link-icon svg,
-.logout-btn svg {
+.logout-btn svg,
+.install-pwa-btn svg {
   flex: 0 0 auto;
   display: block;
 }
@@ -2119,7 +2137,8 @@ a {
     font-size: 0.94rem;
   }
 
-  .logout-btn {
+  .logout-btn,
+  .install-pwa-btn {
     min-height: 42px;
     padding: 10px 12px;
   }
