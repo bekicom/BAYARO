@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { buildBarcodeTagMarkup } from "./BarcodeTag";
 import { ModalShell } from "../modal/ModalShell";
 import { getBarcodeLabelOption, getBarcodePrintSettings, getBarcodeTicketDimensions } from "../../utils/barcodeSettings";
+import { printHtml } from "../../utils/printHtml";
 
 function buildPrintDocument({ tickets, settings }) {
   const { widthMm, heightMm } = getBarcodeTicketDimensions(settings);
@@ -228,7 +229,7 @@ export function BulkPrintBarcodeModal({ open, products, onClose }) {
     });
   };
 
-  const handlePrint = () => {
+  const handlePrint = async () => {
     const tickets = printableProducts
       .flatMap((item) => {
         if (!selectedMap[item._id]) return [];
@@ -240,12 +241,11 @@ export function BulkPrintBarcodeModal({ open, products, onClose }) {
 
     if (!tickets) return;
 
-    const printWindow = window.open("", "_blank", "width=900,height=700");
-    if (!printWindow) return;
-
-    printWindow.document.open();
-    printWindow.document.write(buildPrintDocument({ tickets, settings }));
-    printWindow.document.close();
+    try {
+      await printHtml(buildPrintDocument({ tickets, settings }));
+    } catch (error) {
+      alert(error?.message || "Printer oynasi ochilmadi");
+    }
   };
 
   return (

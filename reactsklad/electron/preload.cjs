@@ -1,1 +1,5 @@
-// Reserved for safe desktop-only APIs if they are needed later.
+const { contextBridge, ipcRenderer } = require("electron");
+
+contextBridge.exposeInMainWorld("bayaroDesktop", {
+  printHtml: (html) => ipcRenderer.invoke("bayaro:print-html", html),
+});

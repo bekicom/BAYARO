@@ -1,6 +1,7 @@
 import { BarcodeTag, buildBarcodeTagMarkup } from "./BarcodeTag";
 import { ModalShell } from "../modal/ModalShell";
 import { getBarcodeLabelOption, getBarcodePrintSettings, getBarcodeTicketDimensions } from "../../utils/barcodeSettings";
+import { printHtml } from "../../utils/printHtml";
 
 function buildPrintDocument({ product, settings, copies }) {
   const { widthMm, heightMm } = getBarcodeTicketDimensions(settings);
@@ -183,13 +184,12 @@ export function PrintBarcodeModal({ open, product, onClose }) {
   const { widthMm: ticketWidthMm, heightMm: ticketHeightMm } = getBarcodeTicketDimensions(settings);
   const ticketWidth = ticketWidthMm * 4;
   const ticketHeight = ticketHeightMm * 4;
-  const handlePrint = () => {
-    const printWindow = window.open("", "_blank", "width=900,height=700");
-    if (!printWindow) return;
-
-    printWindow.document.open();
-    printWindow.document.write(buildPrintDocument({ product, settings, copies: settings.copies }));
-    printWindow.document.close();
+  const handlePrint = async () => {
+    try {
+      await printHtml(buildPrintDocument({ product, settings, copies: settings.copies }));
+    } catch (error) {
+      alert(error?.message || "Printer oynasi ochilmadi");
+    }
   };
 
   return (
