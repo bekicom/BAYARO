@@ -9,6 +9,7 @@ function createWindow() {
     height: 820,
     minWidth: 1100,
     minHeight: 720,
+    fullscreen: true,
     title: "BAYARO",
     backgroundColor: "#071226",
     autoHideMenuBar: true,
