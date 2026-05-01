@@ -16,7 +16,7 @@ const PREVIEW_PRODUCT = {
   code: "4512",
   category: "Kiyimlar",
   barcode: "2427000098116",
-  retailPrice: 25000,
+  retailPrice: 25,
   sizeOptions: ["5-8"],
   colorOptions: ["Multikolor"],
   gender: "ogil_bola",

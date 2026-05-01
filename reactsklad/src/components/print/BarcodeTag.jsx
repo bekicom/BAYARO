@@ -22,7 +22,7 @@ export function buildProductMeta(product, settings) {
     code: normalizeValue(product?.code || product?.model || "-"),
     category: normalizeValue(getCategoryName(product), ""),
     barcode: String(product?.barcode || "-"),
-    price: formatMoneyWithCurrency(product?.retailPrice, "UZS"),
+    price: formatMoneyWithCurrency(product?.retailPrice),
   };
 }
 

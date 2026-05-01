@@ -9,7 +9,7 @@ const initialState = {
   address: "",
   note: "",
   openingBalanceAmount: "",
-  openingBalanceCurrency: "uzs",
+  openingBalanceCurrency: "usd",
 };
 
 export function SupplierModal({ open, current, onClose, onSubmit, loading }) {
@@ -24,7 +24,7 @@ export function SupplierModal({ open, current, onClose, onSubmit, loading }) {
       address: current.address || "",
       note: current.note || "",
       openingBalanceAmount: "",
-      openingBalanceCurrency: "uzs",
+      openingBalanceCurrency: "usd",
     } : initialState);
   }, [open, current]);
 
@@ -61,8 +61,8 @@ export function SupplierModal({ open, current, onClose, onSubmit, loading }) {
               <span>Boshlang'ich qarz</span>
               <input
                 type="text"
-                inputMode="numeric"
-                placeholder="Masalan 250 000"
+                inputMode="decimal"
+                placeholder="Masalan 250"
                 value={form.openingBalanceAmount}
                 onChange={(event) => setForm((prev) => ({ ...prev, openingBalanceAmount: formatGroupedNumberInput(event.target.value) }))}
               />
@@ -71,7 +71,6 @@ export function SupplierModal({ open, current, onClose, onSubmit, loading }) {
             <label>
               <span>Valyuta</span>
               <select value={form.openingBalanceCurrency} onChange={(event) => setForm((prev) => ({ ...prev, openingBalanceCurrency: event.target.value }))}>
-                <option value="uzs">UZS</option>
                 <option value="usd">USD</option>
               </select>
             </label>

@@ -66,9 +66,8 @@ export function normalizeVariantStocks(value) {
 export function convertToUzs(value, priceCurrency, usdRate) {
   const numeric = Number(value);
   if (!Number.isFinite(numeric) || numeric < 0) return NaN;
-  if (String(priceCurrency).toLowerCase() === "usd") {
-    return roundMoney(numeric * Number(usdRate || 0));
-  }
+  // BAYARO sklad prices are stored in the same currency the shop uses.
+  // Historical name is kept because controllers already depend on it.
   return roundMoney(numeric);
 }
 
@@ -114,7 +113,7 @@ export function mergeVariantStocks(currentStocks, incomingStocks) {
 export function parseProductPayload(body, usdRate) {
   const unit = normalizeProductUnit(body?.unit);
   const paymentType = String(body?.paymentType || "naqd").trim().toLowerCase();
-  const priceCurrency = String(body?.priceCurrency || "uzs").trim().toLowerCase();
+  const priceCurrency = String(body?.priceCurrency || "usd").trim().toLowerCase();
   const gender = String(body?.gender || "").trim().toLowerCase();
   const sizeOptions = normalizeStringArray(body?.sizeOptions);
   const colorOptions = normalizeStringArray(body?.colorOptions);

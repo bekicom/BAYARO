@@ -1,12 +1,15 @@
 export function formatMoney(value) {
   const amount = Number(value || 0);
   return amount.toLocaleString("uz-UZ", {
-    minimumFractionDigits: 0,
+    minimumFractionDigits: Number.isInteger(amount) ? 0 : 2,
     maximumFractionDigits: 2,
   });
 }
 
-export function formatMoneyWithCurrency(value, currency = "so'm") {
+export function formatMoneyWithCurrency(value, currency = "$") {
+  if (currency === "$" || String(currency).toUpperCase() === "USD") {
+    return `$${formatMoney(value)}`;
+  }
   return `${formatMoney(value)} ${currency}`;
 }
 
@@ -94,14 +97,26 @@ export function toCurrencyNumber(value) {
 }
 
 export function formatGroupedNumberInput(value) {
-  const digits = String(value ?? "").replace(/\D/g, "");
-  if (!digits) return "";
-  return digits.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  const normalized = String(value ?? "")
+    .replace(/,/g, ".")
+    .replace(/[^0-9.]/g, "");
+  const [rawWhole = "", ...rest] = normalized.split(".");
+  const whole = rawWhole.replace(/^0+(?=\d)/, "");
+  const fraction = rest.join("").slice(0, 2);
+  const groupedWhole = whole ? whole.replace(/\B(?=(\d{3})+(?!\d))/g, " ") : "";
+  if (normalized.includes(".")) return `${groupedWhole || "0"}.${fraction}`;
+  return groupedWhole;
 }
 
 export function parseGroupedNumberInput(value) {
-  const digits = String(value ?? "").replace(/\D/g, "");
-  return digits ? Number(digits) : 0;
+  const normalized = String(value ?? "")
+    .replace(/\s/g, "")
+    .replace(/,/g, ".")
+    .replace(/[^0-9.]/g, "");
+  const [whole = "", ...rest] = normalized.split(".");
+  const decimal = rest.length ? `${whole || "0"}.${rest.join("")}` : whole;
+  const numeric = Number(decimal);
+  return Number.isFinite(numeric) ? numeric : 0;
 }
 
 export function formatPercentInput(value) {

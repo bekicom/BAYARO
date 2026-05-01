@@ -22,7 +22,7 @@ const purchaseSchema = new mongoose.Schema(
     unit: { type: String, enum: PRODUCT_UNITS, required: true },
     variants: { type: [purchaseVariantSchema], default: [] },
     purchasePrice: { type: Number, required: true, min: 0 },
-    priceCurrency: { type: String, enum: ["uzs", "usd"], default: "uzs" },
+    priceCurrency: { type: String, enum: ["uzs", "usd"], default: "usd" },
     usdRateUsed: { type: Number, required: true, min: 1, default: 12600 },
     totalCost: { type: Number, required: true, min: 0 },
     paidAmount: { type: Number, required: true, min: 0, default: 0 },

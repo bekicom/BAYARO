@@ -68,7 +68,7 @@ export const createSupplier = asyncHandler(async (req, res) => {
   const address = String(req.body?.address || "").trim();
   const note = String(req.body?.note || "").trim();
   const openingBalanceAmount = Number(req.body?.openingBalanceAmount || 0);
-  const openingBalanceCurrency = String(req.body?.openingBalanceCurrency || "uzs").trim().toLowerCase();
+  const openingBalanceCurrency = String(req.body?.openingBalanceCurrency || "usd").trim().toLowerCase();
   const usdRate = Number(req.body?.usdRateUsed || process.env.DEFAULT_USD_RATE || 12600);
 
   if (!name) {

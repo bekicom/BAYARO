@@ -196,7 +196,7 @@ function calculateRetailPriceFromMarkup(purchasePriceInput, markupPercentInput) 
   const purchasePrice = parseGroupedNumberInput(purchasePriceInput);
   const markupPercent = parsePercentInput(markupPercentInput);
   if (!purchasePrice || markupPercent < 0) return "";
-  return formatGroupedNumberInput(Math.round(purchasePrice * (1 + markupPercent / 100)));
+  return formatGroupedNumberInput((purchasePrice * (1 + markupPercent / 100)).toFixed(2));
 }
 
 function calculateMarkupPercentFromPrices(purchasePriceInput, retailPriceInput) {
@@ -644,7 +644,7 @@ export function ProductModal({
             <span>Kelish narxi</span>
             <input
               type="text"
-              inputMode="numeric"
+              inputMode="decimal"
               value={form.purchasePrice}
               onChange={(event) => {
                 priceSyncSourceRef.current = "purchase";
@@ -670,7 +670,7 @@ export function ProductModal({
             <span>Sotish narxi</span>
             <input
             type="text"
-            inputMode="numeric"
+            inputMode="decimal"
             value={form.retailPrice}
             onChange={(event) => {
               priceSyncSourceRef.current = "retail";
@@ -694,7 +694,7 @@ export function ProductModal({
           </label>
           <label>
             <span>To'langan summa</span>
-            <input type="text" inputMode="numeric" value={form.paidAmount} onChange={handleGroupedNumberChange(setForm, "paidAmount")} disabled={form.paymentType === "naqd" || form.paymentType === "qarz"} />
+            <input type="text" inputMode="decimal" value={form.paidAmount} onChange={handleGroupedNumberChange(setForm, "paidAmount")} disabled={form.paymentType === "naqd" || form.paymentType === "qarz"} />
           </label>
           {form.unit !== "dona" ? (
             <label>
@@ -787,7 +787,7 @@ export function ProductModal({
                   </label>
                   <label>
                     <span>Mayda narx</span>
-                    <input type="text" inputMode="numeric" value={form.piecePrice} onChange={handleGroupedNumberChange(setForm, "piecePrice")} />
+                    <input type="text" inputMode="decimal" value={form.piecePrice} onChange={handleGroupedNumberChange(setForm, "piecePrice")} />
                   </label>
                 </>
               ) : null}

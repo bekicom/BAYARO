@@ -337,7 +337,7 @@ export const restockProduct = asyncHandler(async (req, res) => {
 
   const quantity = Number(req.body?.quantity || 0);
   const paymentType = String(req.body?.paymentType || "naqd").trim().toLowerCase();
-  const priceCurrency = String(req.body?.priceCurrency || "uzs").trim().toLowerCase();
+  const priceCurrency = String(req.body?.priceCurrency || "usd").trim().toLowerCase();
   const pricingMode = String(req.body?.pricingMode || "keep_old").trim().toLowerCase();
   const purchasePrice = convertToUzs(req.body?.purchasePrice || 0, priceCurrency, DEFAULT_USD_RATE);
   const retailPriceNew = convertToUzs(req.body?.retailPrice || 0, priceCurrency, DEFAULT_USD_RATE);
